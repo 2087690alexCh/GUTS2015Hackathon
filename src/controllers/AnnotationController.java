@@ -35,7 +35,7 @@ public class AnnotationController {
 	static Grid grid = new Grid(50, 55.7, -4.5, 75);
 	static List<Event> events = new ArrayList<Event>();
 	static boolean isDataRequested=false;
-	static List<String> eventsNames;
+	static List<String> eventsNames=new ArrayList<String>();
 	@RequestMapping("/index")
 	public ModelAndView index(){
 		ModelAndView modelAndView = new ModelAndView("HelloPage");
@@ -119,12 +119,14 @@ public class AnnotationController {
 //		return nodes;
 //		
 //	}
-
+	
 	@RequestMapping(value="/getRequest")
 	public @ResponseBody List<MapNode> getShopInJSON() {
 		List<Event> events = new ArrayList<Event>();
 		
+		if (!isDataRequested){
 		try {
+			isDataRequested=true;
 			URL url = new URL("https://raw.githubusercontent.com/2087690alexCh/GUTS2015Hackathon/master/src/controllers/CityEvents.txt");
 	        BufferedReader br = new BufferedReader(
 	        new InputStreamReader(url.openStream()));
@@ -166,10 +168,27 @@ public class AnnotationController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		}
 		List<MapNode> nodes = grid.getNodes();
-		for(MapNode i: nodes)
-			if(i.getScore()!=0.0)
-				System.out.println(i);
+
+		List<Event> newEvents = new ArrayList<Event>();
+		List<Double> result = new ArrayList<Double>();
+		eventsNames.add("RACE");
+		eventsNames.add("FRAUD");
+		eventsNames.add("MUGGING");
+		eventsNames.add("ROBBERY");
+		eventsNames.add("MURDER");
+		Random randomGenerator = new Random();
+		for (int i=0;i<10;i++){
+			Event event = new Event();
+			event.setEventType(EventType.valueOf(eventsNames.get(randomGenerator.nextInt(eventsNames.size()-1))));
+			event.setLat(55.7+randomGenerator.nextDouble());
+			event.setLng(-4.5+randomGenerator.nextDouble());
+			event.setPeople(randomGenerator.nextInt(200));
+			newEvents.add(event);
+			grid.register(event);
+		}
+		
 		return nodes;
 		
 	}

@@ -35,7 +35,7 @@ app.controller('mainController',["$http",function($http){
 //		
 		var heatmap = new google.maps.visualization.HeatmapLayer({
 		      data: window.heatMapData,
-		      radius:50,
+		      radius:300,
 		      dissipating:true
 		    });
 		heatmap.setMap(map);
@@ -46,7 +46,10 @@ app.controller('mainController',["$http",function($http){
 	function initMap() {
 	   map = new google.maps.Map(document.getElementById('map'), {
 	      center: new google.maps.LatLng(55.8580,-4.259),
-	      zoom: 13,
+	      zoom: 14,
+	      scrollwheel: false,
+	      zoomControl: false,
+	      streetViewControl: false,
 	      mapTypeId: google.maps.MapTypeId.ROADMAP
 	   });
 	   

@@ -18,6 +18,7 @@ public class Grid {
 	
 	public void register(Event event){
 		int xCoord=latToX(event.getLat()), yCoord=lngToY(event.getLng());
+		System.out.println(xCoord+" "+yCoord);
 		grid[xCoord][yCoord]+=(event.getEventType().score())
 				*java.lang.Math.log10((double)(event.getPeople()));
 	}
@@ -45,8 +46,13 @@ public class Grid {
 	public List<MapNode> getNodes() {
 		List<MapNode> list = new ArrayList<MapNode>();
 		for(int x=0;x<resolution;x++)
-			for(int y=0;y<resolution;y++)
-				list.add(new MapNode(xToLat(x),yToLng(y),grid[x][y]));
+			for(int y=0;y<resolution;y++){
+				MapNode node = new MapNode();
+				node.setLat(xToLat(x));
+				node.setLng(yToLng(y));
+				node.setScore(grid[x][y]);
+				list.add(node);
+			}
 		return list;
 	}
 }

@@ -28,7 +28,7 @@ import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
 
 @RestController
 public class AnnotationController {
-	Grid grid = new Grid(50, 56, -5, 75);
+	Grid grid = new Grid(50, 54.5, -5, 75);
 	
 	@RequestMapping("/index")
 	public ModelAndView index(){
@@ -53,7 +53,6 @@ public class AnnotationController {
 			URL url = new URL("https://raw.githubusercontent.com/2087690alexCh/GUTS2015Hackathon/master/src/controllers/CityEvents.txt");
 	        BufferedReader br = new BufferedReader(
 	        new InputStreamReader(url.openStream()));
-		    StringBuilder sb = new StringBuilder();
 		    String line = br.readLine();
 		    
 		    DateFormat format = new SimpleDateFormat("EEE MMM d HH:mm:ss z yyyy", Locale.ENGLISH);
@@ -71,10 +70,10 @@ public class AnnotationController {
 			    	event.setLng(Double.parseDouble(words[7]));
 			    	event.setEventType(EventType.valueOf(words[8]));
 			    	event.setPeople(Integer.parseInt(words[9]));
+			    	grid.register(event);
 			    	
 			    	// deprecate me!!!
 			    	events.add(event);
-			    	grid.register(event);
 		    	}
 		    	catch (ParseException e){} catch (java.text.ParseException e) {
 					// TODO Auto-generated catch block
@@ -92,7 +91,11 @@ public class AnnotationController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return grid.getNodes();
+		List<MapNode> nodes = grid.getNodes();
+		for(MapNode i: nodes)
+			if(i.getScore()!=0.0)
+				System.out.println(i);
+		return nodes;
 		
 	}
 

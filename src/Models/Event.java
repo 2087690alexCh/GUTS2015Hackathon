@@ -9,7 +9,7 @@ public class Event {
 	private Double lat;
 	private Double lng;
 	private String eventName;
-	private String dangerousLvl;
+	private Double dangerousLvl;
 	
 	public Date getDate() {
 		return date;
@@ -35,10 +35,10 @@ public class Event {
 	public void setEventName(String eventName) {
 		this.eventName = eventName;
 	}
-	public String getDangerousLvl() {
+	public Double getDangerousLvl() {
 		return dangerousLvl;
 	}
-	public void setDangerousLvl(String dangerousLvl) {
+	public void setDangerousLvl(Double dangerousLvl) {
 		this.dangerousLvl = dangerousLvl;
 	}
 }

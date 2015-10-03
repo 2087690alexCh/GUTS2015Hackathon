@@ -62,6 +62,11 @@ public class AnnotationController {
 			    
 		    	Event event = new Event();
 		    	event.setDate(date);
+		    	String[] words = line.split(" |\t"); 
+		    	event.setLat(Double.parseDouble(words[6]));
+		    	event.setLng(Double.parseDouble(words[7]));
+		    	event.setEventName(words[8]);
+		    	event.setDangerousLvl(Double.parseDouble(words[7]));
 		    	events.add(event);
 		    	}
 		    	catch (ParseException e){} catch (java.text.ParseException e) {

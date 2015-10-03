@@ -21,11 +21,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import Models.Event;
 import Models.EventType;
+import Models.Grid;
+import Models.MapNode;
 
 import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
 
 @RestController
 public class AnnotationController {
+	Grid grid = new Grid(0, 0, 0, 0);
 	
 	@RequestMapping("/index")
 	public ModelAndView index(){
@@ -43,7 +46,7 @@ public class AnnotationController {
 	
 
 	@RequestMapping(value="/getRequest")
-	public @ResponseBody List<Event> getShopInJSON() {
+	public @ResponseBody List<MapNode> getShopInJSON() {
 		List<Event> events = new ArrayList<Event>();
 		
 		try {
@@ -58,19 +61,20 @@ public class AnnotationController {
 		    while (line != null) {
 		    	String dateString = line.substring(0, 30);
 		    	try{
-		    	Date date = format.parse(dateString);
-		    	System.out.println(date); // Sat Jan 02 00:00:00 GMT 2010
-			    
-		    	Event event = new Event();
-		    	event.setDate(date);
-		    	String[] words = line.split(" |\t"); 
-		    	event.setLat(Double.parseDouble(words[6]));
-		    	event.setLng(Double.parseDouble(words[7]));
-		    	event.setEventType(EventType.valueOf(words[8]));
-		    	event.setPeople(Integer.parseInt(words[9]));
-		    	// deprecate me!!!
-		    	events.add(event);
-		    	//grid.register(event);
+			    	Date date = format.parse(dateString);
+			    	System.out.println(date); // Sat Jan 02 00:00:00 GMT 2010
+				    
+			    	Event event = new Event();
+			    	event.setDate(date);
+			    	String[] words = line.split(" |\t"); 
+			    	event.setLat(Double.parseDouble(words[6]));
+			    	event.setLng(Double.parseDouble(words[7]));
+			    	event.setEventType(EventType.valueOf(words[8]));
+			    	event.setPeople(Integer.parseInt(words[9]));
+			    	
+			    	// deprecate me!!!
+			    	events.add(event);
+			    	grid.register(event);
 		    	}
 		    	catch (ParseException e){} catch (java.text.ParseException e) {
 					// TODO Auto-generated catch block
@@ -80,7 +84,6 @@ public class AnnotationController {
 		        line = br.readLine();
 		        
 		    }
-		    String everything = sb.toString();
 		  
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -89,7 +92,7 @@ public class AnnotationController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return events;
+		return grid.getNodes();
 		
 	}
 

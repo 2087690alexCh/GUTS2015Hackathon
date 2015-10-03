@@ -68,7 +68,9 @@ public class AnnotationController {
 		    	event.setLng(Double.parseDouble(words[7]));
 		    	event.setEventType(EventType.valueOf(words[8]));
 		    	event.setPeople(Integer.parseInt(words[9]));
+		    	// deprecate me!!!
 		    	events.add(event);
+		    	//grid.register(event);
 		    	}
 		    	catch (ParseException e){} catch (java.text.ParseException e) {
 					// TODO Auto-generated catch block

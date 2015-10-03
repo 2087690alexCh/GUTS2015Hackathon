@@ -56,13 +56,13 @@ public class AnnotationController {
 		    String line = br.readLine();
 		    
 		    DateFormat format = new SimpleDateFormat("EEE MMM d HH:mm:ss z yyyy", Locale.ENGLISH);
-		    
+
 		    while (line != null) {
 		    	String dateString = line.substring(0, 30);
 		    	try{
 			    	Date date = format.parse(dateString);
 			    	System.out.println(date); // Sat Jan 02 00:00:00 GMT 2010
-				    
+
 			    	Event event = new Event();
 			    	event.setDate(date);
 			    	String[] words = line.split(" |\t"); 

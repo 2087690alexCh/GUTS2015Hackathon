@@ -19,8 +19,12 @@ public class Grid {
 	public void register(Event event){
 		int xCoord=latToX(event.getLat()), yCoord=lngToY(event.getLng());
 		System.out.println(xCoord+" "+yCoord);
-		grid[xCoord][yCoord]+=(event.getEventType().score())
-				*java.lang.Math.log10((double)(event.getPeople()));
+		try{
+			grid[xCoord][yCoord]+=(event.getEventType().score())
+					*java.lang.Math.log10((double)(event.getPeople()));
+		} catch (Exception e) {
+			// lala
+		}
 	}
 	
 	public double getScore(double lat, double lng){

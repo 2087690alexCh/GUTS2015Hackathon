@@ -2,11 +2,15 @@ package controllers;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.nio.file.Paths;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +19,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import Models.ShopPOJO;
+import Models.Event;
+
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
 
 @RestController
 public class AnnotationController {
@@ -36,9 +42,8 @@ public class AnnotationController {
 	
 
 	@RequestMapping(value="/getRequest")
-	public @ResponseBody ShopPOJO getShopInJSON() {
-		ShopPOJO shop = new ShopPOJO();
-		shop.setName("testName");
+	public @ResponseBody List<Event> getShopInJSON() {
+		List<Event> events = new ArrayList<Event>();
 		
 		try {
 			URL url = new URL("https://raw.githubusercontent.com/2087690alexCh/GUTS2015Hackathon/master/src/controllers/CityEvents.txt");
@@ -46,14 +51,29 @@ public class AnnotationController {
 	        new InputStreamReader(url.openStream()));
 		    StringBuilder sb = new StringBuilder();
 		    String line = br.readLine();
-
+		    
+		    DateFormat format = new SimpleDateFormat("EEE MMM d HH:mm:ss z yyyy", Locale.ENGLISH);
+		    
 		    while (line != null) {
-		        sb.append(line);
-		        sb.append(System.lineSeparator());
+		    	String dateString = line.substring(0, 30);
+		    	try{
+		    	Date date = format.parse(dateString);
+		    	System.out.println(date); // Sat Jan 02 00:00:00 GMT 2010
+			    
+		    	Event event = new Event();
+		    	event.setDate(date);
+		    	events.add(event);
+		    	}
+		    	catch (ParseException e){} catch (java.text.ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				};
+			    
 		        line = br.readLine();
+		        
 		    }
 		    String everything = sb.toString();
-		    shop.setName(everything);
+		  
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -61,7 +81,7 @@ public class AnnotationController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return shop;
+		return events;
 		
 	}
 

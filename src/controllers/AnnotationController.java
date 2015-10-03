@@ -4,6 +4,9 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.nio.file.Paths;
 import java.util.Map;
 
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,8 +41,9 @@ public class AnnotationController {
 		shop.setName("testName");
 		
 		try {
-		
-			BufferedReader br = new BufferedReader(new FileReader("CityEvents.txt"));
+			URL url = new URL("https://raw.githubusercontent.com/2087690alexCh/GUTS2015Hackathon/master/src/controllers/CityEvents.txt");
+	        BufferedReader br = new BufferedReader(
+	        new InputStreamReader(url.openStream()));
 		    StringBuilder sb = new StringBuilder();
 		    String line = br.readLine();
 
@@ -49,6 +53,7 @@ public class AnnotationController {
 		        line = br.readLine();
 		    }
 		    String everything = sb.toString();
+		    shop.setName(everything);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

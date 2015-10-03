@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import Models.Event;
+import Models.EventType;
 
 import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
 
@@ -65,8 +66,8 @@ public class AnnotationController {
 		    	String[] words = line.split(" |\t"); 
 		    	event.setLat(Double.parseDouble(words[6]));
 		    	event.setLng(Double.parseDouble(words[7]));
-		    	event.setEventName(words[8]);
-		    	event.setDangerousLvl(Double.parseDouble(words[7]));
+		    	event.setEventType(EventType.valueOf(words[8]));
+		    	event.setPeople(Integer.parseInt(words[9]));
 		    	events.add(event);
 		    	}
 		    	catch (ParseException e){} catch (java.text.ParseException e) {

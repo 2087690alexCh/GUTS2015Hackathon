@@ -8,8 +8,9 @@ public class Event {
 	
 	private Double lat;
 	private Double lng;
-	private String eventName;
-	private Double dangerousLvl;
+	private EventType type;
+	
+	private int people;
 	
 	public Date getDate() {
 		return date;
@@ -29,16 +30,16 @@ public class Event {
 	public void setLng(Double lng) {
 		this.lng = lng;
 	}
-	public String getEventName() {
-		return eventName;
+	public EventType getEventType() {
+		return type;
 	}
-	public void setEventName(String eventName) {
-		this.eventName = eventName;
+	public void setEventType(EventType eventType) {
+		this.type = eventType;
 	}
-	public Double getDangerousLvl() {
-		return dangerousLvl;
+	public int getPeople() {
+		return people;
 	}
-	public void setDangerousLvl(Double dangerousLvl) {
-		this.dangerousLvl = dangerousLvl;
+	public void setPeople(int people) {
+		this.people = people;
 	}
 }

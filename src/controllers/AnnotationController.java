@@ -28,7 +28,7 @@ import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
 
 @RestController
 public class AnnotationController {
-	Grid grid = new Grid(0, 0, 0, 0);
+	Grid grid = new Grid(50, 56, -5, 75);
 	
 	@RequestMapping("/index")
 	public ModelAndView index(){

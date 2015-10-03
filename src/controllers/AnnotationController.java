@@ -1,5 +1,9 @@
 package controllers;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Map;
 
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,9 +35,29 @@ public class AnnotationController {
 	@RequestMapping(value="/getRequest")
 	public @ResponseBody ShopPOJO getShopInJSON() {
 		ShopPOJO shop = new ShopPOJO();
-		shop.setName("testName");		
-		return shop;
+		shop.setName("testName");
+		
+		try {
+		
+			BufferedReader br = new BufferedReader(new FileReader("CityEvents.txt"));
+		    StringBuilder sb = new StringBuilder();
+		    String line = br.readLine();
 
+		    while (line != null) {
+		        sb.append(line);
+		        sb.append(System.lineSeparator());
+		        line = br.readLine();
+		    }
+		    String everything = sb.toString();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return shop;
+		
 	}
 
 	@RequestMapping("/welcome/{name}")

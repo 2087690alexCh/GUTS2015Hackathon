@@ -1,0 +1,114 @@
+p {
+	color:red;
+}
+
+/*something which is .nav then something which is li
+ .nav element is parent of li element*/
+.nav li {
+	display: inline;
+	padding-right: 30px;
+}
+
+/*here it is similar but with parent of parent, parent, child*/ 
+ ul .nav a {
+	text-decoration: none;
+}
+
+ ul .nav a:hover {
+	text-decoration: underline;
+	font-size: 30px;
+	color: red;	
+}
+
+/*form styling*/
+
+form li{
+	list-style:none;
+	margin-bottom: 20px;
+}
+
+/* instead of inline */
+label{
+	display:block;
+	cursor:pointer;
+}
+
+ul{
+	padding-left: 0px;
+}
+
+/* background image 
+	body {
+		background: url(../img/nettuts_logo.jpg) no-repeat;
+		width: 142px;
+		height: 43px;
+	}
+*/
+
+.logo {
+	font-size: 120px;
+	text-align: center;
+	margin-top:50px;
+	text-shadow: 5px 10px 10px red;
+}
+
+.position{
+	width: 600px;
+	margin: 20px auto;
+	
+	margin-top: 20px;
+	margin-bottom: 20px;
+	
+	/* like a clock top,right,bottom,left*/
+	margin: 20px 0px 10px 5px;
+}
+
+/* Creating Grids */
+
+.grid1,
+.grid2,
+.grid3,
+.grid4,
+.grid5,
+.grid6 {
+	display: inline;
+	float: left;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.grid1{
+	width: 120px;
+}
+.grid2{
+	width: 240px;
+}
+.grid3{
+	width: 360px;
+}
+.grid4{
+	width: 480px;
+}
+.grid5{
+	width: 600px;
+}
+.grid6{
+	width: 720;
+}
+
+body{
+	margin: 0 auto;
+	width:800px;	
+}
+
+/* Box model and Width
+	Width is based on the content and adding padding will increase it
+	changing box-size to border-box set the css to apply the width to the border
+	of the element, so when we add padding it shrinks the conent 
+*/
+
+section{
+	box-sizing: border-box;
+	padding:15px;
+}
+ 

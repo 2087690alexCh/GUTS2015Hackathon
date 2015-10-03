@@ -1,0 +1,162 @@
+.container{
+	width:1520px;
+	margin:auto;
+}
+.banner{
+	background: url(../images/banner.jpg) no-repeat;
+	width:1000px;
+	height: 200px;
+	clear: both; /* very important - clear previous floats*/
+	display:inline;
+	float:left;
+	}
+
+header{
+	overflow:hidden;
+	
+}
+.grid1,
+.grid2,
+.grid3,
+.grid4,
+.grid5,
+.grid6 {
+	display:inline;
+	float:left;
+	clear:both;
+}
+
+.grid1{
+	width:120px;
+}
+.grid2{
+	width:240px;
+}
+.grid3{
+	width:360px;
+}
+.grid4{
+	width:480px;
+}
+.grid5{
+	width:600px;
+	margin-right:10px;
+}
+.grid6{
+	width:720px;
+}
+.grid7{
+	width:840px;
+}
+.grid8{
+	width:960px;
+}
+.grid9{
+	width:1120px;
+}
+.grid10{
+	width:1240px;
+}
+.grid11{
+	width:1360px;
+}
+.grid12{
+	width:1520px;
+}
+
+/*
+	=header
+*/ 
+
+header h1{
+	display: inline;
+	float:left;
+	margin-top:0px;
+}
+ul{
+	display: inline;
+	float:right;
+}
+
+nav ul li{
+	display: inline;
+	padding-right:30px;
+}
+nav a{
+	text-decoration:none;
+}
+
+.black{
+	background: black;
+	width:100px;
+	height:200px;
+	float: right;
+	
+}
+footer{
+	clear: both;
+}
+
+a{
+	color: #7e7e7e;
+	text-transform: lowercase;
+	
+}
+
+a:hover,.selected{
+	color: black;
+}
+
+h2{
+	border-bottom: 1px solid grey;
+	padding-bottom: 25px;
+	line-height: 10px;
+}
+/* Quotes */
+blockquote{
+	position:relative;
+}
+
+blockquote p{
+	padding-left:60px;
+}
+
+blockquote p:first-child:before {
+	content: "\"";
+	font-size: 40px;
+	font-style: italic;
+	color: grey;
+	position:absolute;
+	top:0;
+	left:0;
+	
+}
+blockquote p:last-child:after{
+	content:'"';
+	font-size: 40px;
+	font-style: italic;
+	color: grey;
+	float:right;	
+}
+
+/* Banner content */
+.banner p {
+	color:white;
+	background: black;
+	display:inline;
+	opacity: 0.4;
+	margin-top:100px;
+	position:relative;
+	top:150px;
+}
+
+/* Work examples view*/
+.anchorPrev{
+	background: url(../images/prev.jpg) no-repeat;
+	width:1000px;
+	height: 200px;
+	clear: both; /* very important - clear previous floats*/
+	display:inline;
+	float:left;
+	}
+	

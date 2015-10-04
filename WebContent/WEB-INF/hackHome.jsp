@@ -5,7 +5,7 @@
 <html ng-app="officeAdvisor" style="height:100%">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<title>Insert title here</title><!-- Latest compiled and minified CSS -->
+	<title>Sergeant - Dispatcher Mode</title><!-- Latest compiled and minified CSS -->
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 

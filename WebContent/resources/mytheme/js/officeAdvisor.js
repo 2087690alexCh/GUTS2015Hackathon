@@ -4,12 +4,12 @@ app.controller('mainController',["$http",'$scope',function($http,$scope){
 	
 	var map;
 	$scope.submitNearest = function (){
-		$http.get('http://localhost:8080/AngularAndSpring/submit/'+$scope.lat +"/"+$scope.lng).success(function(data){
+		$http.get('/AngularAndSpring/submit/'+$scope.lat +"/"+$scope.lng).success(function(data){
 		});
 	};
 	var heatMapData;
 	
-	var request = $.get("http://localhost:8080/AngularAndSpring/getRequest");
+	var request = $.get("/AngularAndSpring/getRequest");
 	
 	request.done(function(data) {
 		window.heatMapData = [];

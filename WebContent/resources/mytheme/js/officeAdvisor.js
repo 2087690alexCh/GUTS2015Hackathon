@@ -1,9 +1,12 @@
 var app=angular.module('officeAdvisor',[]);
 
-app.controller('mainController',["$http",function($http){
+app.controller('mainController',["$http",'$scope',function($http,$scope){
 	
 	var map;
-	
+	$scope.submitNearest = function (){
+		$http.get('http://localhost:8080/AngularAndSpring/submit/'+$scope.lat +"/"+$scope.lng).success(function(data){
+		});
+	};
 	var heatMapData;
 	
 	var request = $.get("http://localhost:8080/AngularAndSpring/getRequest");
@@ -42,7 +45,8 @@ app.controller('mainController',["$http",function($http){
 		setTimeout(function(){heatmap.setMap(map);}, 2000);
 	});
 	
-
+	$scope.lat=0;
+	$scope.lng=0;
 	function initMap() {
 	   map = new google.maps.Map(document.getElementById('map'), {
 	      center: new google.maps.LatLng(55.8580,-4.259),
@@ -52,15 +56,26 @@ app.controller('mainController',["$http",function($http){
 	      streetViewControl: false,
 	      mapTypeId: google.maps.MapTypeId.ROADMAP
 	   });
+	    
 	   
+		google.maps.event.addListener(map, 'click', function(event) {
+			   placeMarker(event.latLng);
+			   $scope.lat=event.latLng.lat();
+			   $scope.lng=event.latLng.lng();
+			   console.log(event.latLng.lat(), event.latLng.lng());
+			}); 
+
+		function placeMarker(location) {
+		    var marker = new google.maps.Marker({
+		        position: location, 
+		        map: map
+		    });
+		}
 	}
 	 
 	 
 
-	    
-	    
-
-	    
+	
 		google.maps.event.addDomListener(window, 'load', initMap);
 	
 		

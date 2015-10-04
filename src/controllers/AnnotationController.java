@@ -36,6 +36,10 @@ public class AnnotationController {
 	static List<Event> events = new ArrayList<Event>();
 	static boolean isDataRequested=false;
 	static List<String> eventsNames=new ArrayList<String>();
+	static boolean dispatcherRequest=false;
+	static double lngDispatcher;
+	static double latDispatcher;
+	
 	@RequestMapping("/index")
 	public ModelAndView index(){
 		ModelAndView modelAndView = new ModelAndView("HelloPage");
@@ -120,6 +124,51 @@ public class AnnotationController {
 //		
 //	}
 	
+	@RequestMapping(value="/pebbleDispatcherCheck/{ourLng}/{ourLat}/}")
+	public @ResponseBody PebbleResponse pebbleDispatcherCheck(@PathVariable Double ourLng,@PathVariable Double ourLat) {
+
+		PebbleResponse pR = new PebbleResponse();
+		pR.setEventName("Dispatcher Emergence");
+		pR.setLat(latDispatcher);
+		pR.setLng(lngDispatcher);
+		
+		if (ourLat>latDispatcher){
+			pR.setDirection("South");
+		}
+		else
+			pR.setDirection("North");
+		
+		if (ourLng>lngDispatcher){
+			pR.setDirection(pR.getDirection()+"-West");
+		}
+		else
+			pR.setDirection(pR.getDirection()+"-East");
+//		
+		double distance=0.0;
+//		double x = Math.abs(ourLng-maxNode.getLng());
+//		double y = Math.abs(ourLat-maxNode.getLat());
+//		distance=Math.sqrt(x*x+y*y);
+		
+			double R =3959; // Radius of the earth in km
+			  double dLat =  Math.toRadians(latDispatcher-ourLat);  // Javascript functions in radians
+			  double dLon =  Math.toRadians(lngDispatcher-ourLng); 
+			  double a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+			          Math.cos( Math.toRadians(ourLat)) * Math.cos(Math.toRadians(latDispatcher)) *
+			          Math.sin(dLon/2) * Math.sin(dLon/2); 
+			  double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+			  double d = R * c; // Distance in km
+		pR.setDistance(d/10);
+		
+		return pR;
+	}
+	
+	@RequestMapping(value="/submit/{lng}/{lat}")
+	public  String submitGoal(@PathVariable Double lng,@PathVariable Double lat) {
+		dispatcherRequest=true;
+		lngDispatcher=lng;
+		latDispatcher=lat;
+		return "success";
+	}
 	@RequestMapping(value="/getRequest")
 	public @ResponseBody List<MapNode> getShopInJSON() {
 		List<Event> events = new ArrayList<Event>();

@@ -51,7 +51,7 @@
       </ul>
       <form class="navbar-form navbar-right" role="search">
        Add critical points by clicking on the map and
-        <button type="submit" class="btn btn-default">Submit Flags to Nearest Officers</button>
+        <button type="submit" class="btn btn-default" ng-click="submitNearest()">Submit Flags to Nearest Officers</button>
       </form>
       
     </div><!-- /.navbar-collapse -->
